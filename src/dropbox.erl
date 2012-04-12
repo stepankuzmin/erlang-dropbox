@@ -1,7 +1,10 @@
 -module(dropbox).
 
 -export([
-    request_token/2, authorize/5, access_token/4, account_info/4
+    request_token/2, authorize/5, access_token/4, 
+    account_info/4,
+    file_get/6,
+    metadata/6
   ]).
 
 request_token(Key, Secret) -> 
@@ -19,3 +22,15 @@ access_token(Key, Secret, Token, TokenSecret) ->
 account_info(Key, Secret, Token, TokenSecret) ->
   {ok, {_, _, AccountInfo}} = oauth:get("https://api.dropbox.com/1/account/info", [], {Key, Secret, hmac_sha1}, Token, TokenSecret),
   AccountInfo.
+
+%%
+%% Files and metadata
+%%
+
+file_get(Key, Secret, Token, TokenSecret, Root, Path) ->
+  {ok, {_, _, File}} = oauth:get("https://api-content.dropbox.com/1/files/" ++ Root ++ "/" ++ Path, [], {Key, Secret, hmac_sha1}, Token, TokenSecret),
+  File.
+
+metadata(Key, Secret, Token, TokenSecret, Root, Path) ->
+  {ok, {_, _, Metadata}} = oauth:get("https://api.dropbox.com/1/metadata/" ++ Root ++ "/" ++ Path, [], {Key, Secret, hmac_sha1}, Token, TokenSecret),
+  Metadata.
