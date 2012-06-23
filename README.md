@@ -1,8 +1,14 @@
 # Erlang Dropbox REST API
 
+## Fetch dependencies
+
+Project depends on [erlang-oauth](https://github.com/tim/erlang-oauth).
+
+    $ rebar get-deps
+
 ## Compile
 
-    $ make
+    $ rebar compile
 
 ## Quick start
 
