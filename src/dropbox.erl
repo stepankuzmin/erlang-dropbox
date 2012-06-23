@@ -1,5 +1,4 @@
 -module(dropbox).
-
 -export([
     request_token/2, authorize/5, access_token/4, 
     account_info/4,
@@ -7,6 +6,7 @@
     metadata/6
   ]).
 
+-spec(request_token(string(), string()) -> [{string(), string()}]).
 request_token(Key, Secret) -> 
   {ok, RequestToken} = oauth:post("https://api.dropbox.com/1/oauth/request_token", [], {Key, Secret, hmac_sha1}),
   oauth:params_decode(RequestToken).

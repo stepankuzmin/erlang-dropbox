@@ -12,7 +12,7 @@ Project depends on [erlang-oauth](https://github.com/tim/erlang-oauth).
 
 ## Quick start
 
-    $ erl -pa ebin -s crypto -s inets -s ssl
+    $ erl -pa ebin deps/*/ebin -s crypto -s inets -s ssl
 
 ### Authentication
 
